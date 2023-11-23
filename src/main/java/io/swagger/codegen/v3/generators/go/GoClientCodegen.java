@@ -10,6 +10,7 @@ import io.swagger.v3.oas.models.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -38,12 +39,12 @@ public class GoClientCodegen extends AbstractGoCodegen {
 
     public void processOpts() {
         super.processOpts();
-
-        if (this.additionalProperties.containsKey("packageName")) {
-            this.setPackageName((String)this.additionalProperties.get("packageName"));
-        } else {
-            this.setPackageName("swagger");
-        }
+        setPackageName(Paths.get(outputFolder).getFileName().toString());
+//        if (this.additionalProperties.containsKey("packageName")) {
+//            this.setPackageName((String)this.additionalProperties.get("packageName"));
+//        } else {
+//            this.setPackageName("swagger");
+//        }
 
         if (this.additionalProperties.containsKey("packageVersion")) {
             this.setPackageVersion((String)this.additionalProperties.get("packageVersion"));
@@ -59,12 +60,12 @@ public class GoClientCodegen extends AbstractGoCodegen {
         this.apiPackage = this.packageName;
         this.supportingFiles.add(new SupportingFile("swagger.mustache", "api", "swagger.yaml"));
         this.supportingFiles.add(new SupportingFile("README.mustache", "", "README.md"));
-        this.supportingFiles.add(new SupportingFile("git_push.sh.mustache", "", "git_push.sh"));
-        this.supportingFiles.add(new SupportingFile("gitignore.mustache", "", ".gitignore"));
-        this.supportingFiles.add(new SupportingFile("configuration.mustache", "", "configuration.go"));
-        this.supportingFiles.add(new SupportingFile("client.mustache", "", "client.go"));
-        this.supportingFiles.add(new SupportingFile("response.mustache", "", "response.go"));
-        this.supportingFiles.add(new SupportingFile(".travis.yml", "", ".travis.yml"));
+//        this.supportingFiles.add(new SupportingFile("git_push.sh.mustache", "", "git_push.sh"));
+//        this.supportingFiles.add(new SupportingFile("gitignore.mustache", "", ".gitignore"));
+//        this.supportingFiles.add(new SupportingFile("configuration.mustache", "", "configuration.go"));
+//        this.supportingFiles.add(new SupportingFile("client.mustache", "", "client.go"));
+//        this.supportingFiles.add(new SupportingFile("response.mustache", "", "response.go"));
+//        this.supportingFiles.add(new SupportingFile(".travis.yml", "", ".travis.yml"));
         if (this.additionalProperties.containsKey("withXml")) {
             this.setWithXml(Boolean.parseBoolean(this.additionalProperties.get("withXml").toString()));
             if (this.withXml) {

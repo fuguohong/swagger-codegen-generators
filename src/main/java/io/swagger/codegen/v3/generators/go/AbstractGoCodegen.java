@@ -171,12 +171,16 @@ public abstract class AbstractGoCodegen extends DefaultCodegenConfig {
     public String toModelName(String name) {
         // camelize the model name
         // phone_number => PhoneNumber
-        return camelize(toModel(name));
+//        return camelize(toModel(name));
+        String[] tmp = name.split("\\.");
+        return camelize(toModel(tmp[tmp.length - 1]));
     }
 
     @Override
     public String toModelFilename(String name) {
-        return toModel("model_" + name);
+//        return toModel("model_" + name);
+        String[] tmp = name.split("\\.");
+        return toModel("model_" + tmp[tmp.length - 1]);
     }
 
     public String toModel(String name) {
